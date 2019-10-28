@@ -5,6 +5,17 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 module.exports = {
-  siteName: 'Gridsome',
-  plugins: []
+  siteName: 'Bristol Meetups',
+  plugins: [
+    {
+      use: '@gridsome/source-filesystem',
+      options: {
+        typeName: 'Event',
+        path: './events/**/*.json',
+      }
+    }
+  ],
+  templates: {
+    Event: '/:org/:title',
+  }
 }

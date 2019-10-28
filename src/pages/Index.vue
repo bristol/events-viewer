@@ -1,33 +1,36 @@
 <template>
   <Layout>
-
-    <!-- Learn how to use images here: https://gridsome.org/docs/images -->
-    <g-image alt="Example image" src="~/favicon.png" width="135" />
-
-    <h1>Hello, world!</h1>
-
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur excepturi labore tempore expedita, et iste tenetur suscipit explicabo! Dolores, aperiam non officia eos quod asperiores
-    </p>
-
-    <p class="home-links">
-      <a href="https://gridsome.org/docs/" target="_blank" rel="noopener">Gridsome Docs</a>
-      <a href="https://github.com/gridsome/gridsome" target="_blank" rel="noopener">GitHub</a>
-    </p>
-
+    <p v-html="$page.allEvent.totalCount"></p>
+    <div class="post-list">
+      <div v-for="(edge, index) in $page.allEvent.edges" :key="index">
+        <h1 class="title" v-html="edge.node.title" />
+        <h1 class="title" v-html="edge.node.path" />
+        <p class="date" v-html="edge.node.date" />
+        <hr class="line" />
+        <p>hi</p>
+      </div>
+    </div>
   </Layout>
-</template>
-
-<script>
+</template><script>
 export default {
   metaInfo: {
-    title: 'Hello, world!'
+    title: "Gridsome How to Blog"
   }
-}
-</script>
-
-<style>
+};
+</script><style>
 .home-links a {
   margin-right: 1rem;
 }
-</style>
+</style><page-query>
+query {
+  allEvent {
+    totalCount
+    edges {
+      node {
+        id
+        path
+      }
+    }
+  }
+}
+</page-query>
