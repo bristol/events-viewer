@@ -12,10 +12,27 @@ module.exports = {
       options: {
         typeName: 'Event',
         path: './events/**/*.json',
+        refs: {
+          org: 'Org',
+
+          // Auto create a collection for all orgs
+          orgs: {
+            typeName: 'Org',
+            create: true
+          }
+        }
+      }
+    },
+    {
+      use: '@gridsome/source-filesystem',
+      options: {
+        typeName: 'Org',
+        path: './orgs/*.json',
       }
     }
   ],
   templates: {
+    Org: '/:id',
     Event: '/:org/:title',
   }
 }
