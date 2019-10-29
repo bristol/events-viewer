@@ -1,14 +1,13 @@
 <template>
   <Layout>
-    <p v-html="$page.allEvent.totalCount"></p>
+    <p>There's {{ $page.allEvent.totalCount }} upcoming events planned</p>
     <div class="post-list">
       <div v-for="(edge, index) in $page.allEvent.edges" :key="index">
         <h1 class="title" v-html="edge.node.title" />
-        <h1 class="title" v-html="edge.node.path" />
-        <p>by</p>
-        <p v-html="edge.node.org.name" />
+        <g-link :to="edge.node.path">Read more</g-link>
+        <br />
+        <g-link :to="edge.node.org.path">{{ edge.node.org.name }}</g-link>
         <hr class="line" />
-        <p>hi</p>
       </div>
     </div>
   </Layout>
@@ -40,6 +39,7 @@ query {
         org {
           name
           homepage
+          path
         }
       }
     }
