@@ -33,6 +33,6 @@ module.exports = {
   ],
   templates: {
     Org: '/:id',
-    Event: '/:org/:title',
+    Event: '/:org/:title-:date',
   }
 }
