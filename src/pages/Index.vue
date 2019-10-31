@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <p>There's {{ $page.allEvent.totalCount }} upcoming events planned</p>
+    <p>There's {{ $page.allEvent.totalCount }} events</p>
     <div class="post-list">
       <div v-for="(edge, index) in $page.allEvent.edges" :key="index">
         <h1 class="title" v-html="edge.node.title" />
