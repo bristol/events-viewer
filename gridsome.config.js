@@ -11,7 +11,7 @@ module.exports = {
       use: '@gridsome/source-filesystem',
       options: {
         typeName: 'Event',
-        path: './events/**/*.json',
+        path: './bristol-events/events/**/*.json',
         refs: {
           org: 'Org',
 
@@ -27,7 +27,7 @@ module.exports = {
       use: '@gridsome/source-filesystem',
       options: {
         typeName: 'Org',
-        path: './orgs/*.json',
+        path: './bristol-events/orgs/*.json',
       }
     }
   ],

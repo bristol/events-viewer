@@ -1,0 +1,3 @@
+[submodule "events"]
+	path = bristol-events
+	url = https://github.com/bristol/events.git
