@@ -1,0 +1,27 @@
+image: archlinux
+packages:
+  - yarn
+sources:
+  - https://github.com/bristol/events-viewer.git
+secrets:
+  - 831aaa6a-360e-42b0-98cc-49ae770789bf
+tasks:
+  - build: |
+      cd events-viewer
+      git submodule update --init --recursive --remote
+      yarn global add @gridsome/cli
+      export PATH=$(yarn global bin):${PATH}
+      yarn install
+      gridsome build
+  - deploy: |
+      cd events-viewer
+      echo 'github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==' >> ~/.ssh/known_hosts
+      git clone --depth 1 git@github.com:bristol/bristol.github.io.git
+      rm -r bristol.github.io/*
+      cp -ra dist/* bristol.github.io/
+      cd bristol.github.io/
+      git config user.email "ci@kragniz.eu"
+      git config user.name "builds.sr.ht"
+      git add -A
+      git commit -m "Update site" -m "JOB_ID=${JOB_ID}" || true
+      git push
